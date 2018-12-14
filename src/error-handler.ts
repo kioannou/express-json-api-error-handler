@@ -23,6 +23,6 @@ export function errorHandler(error: any, req: any, res: any, next: any) {
       // Do
       break;
     default:
-      // Unknown Error
+    // Unknown Error
   }
 }

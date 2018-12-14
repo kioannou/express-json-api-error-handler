@@ -1,5 +1,5 @@
 {
-  "name": "express-error-handler",
+  "name": "express-json-api-error-handler",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",

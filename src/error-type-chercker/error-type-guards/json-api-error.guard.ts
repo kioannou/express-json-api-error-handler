@@ -5,14 +5,15 @@ export function checkJsonApiError(error: any): boolean {
   let isJsonApiError = false;
   const candidateError = error as IJsonApiError;
 
-  const hasRequiredAttributes = (candidateError.id
-    || candidateError.links
-    || candidateError.status
-    || candidateError.code
-    || candidateError.title
-    || candidateError.detail
-    || candidateError.source
-    || candidateError.meta);
+  const hasRequiredAttributes =
+    candidateError.id ||
+    candidateError.links ||
+    candidateError.status ||
+    candidateError.code ||
+    candidateError.title ||
+    candidateError.detail ||
+    candidateError.source ||
+    candidateError.meta;
 
   const isNotAKnownErrorInstance = !checkKnownError(error);
 
