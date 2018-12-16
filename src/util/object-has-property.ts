@@ -1,5 +1,5 @@
 export function objectHasProperty(obj: any, property: string): boolean {
-  if (typeof obj == 'object' && obj !== null) {
+  if (typeof obj === 'object' && obj !== null) {
     return Object.prototype.hasOwnProperty.call(obj, property);
   } else if (obj === null) {
     throw new Error(

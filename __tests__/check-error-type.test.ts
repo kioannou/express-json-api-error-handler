@@ -1,5 +1,5 @@
-import { checkErrorType } from '../src/error-type-chercker/check-error-type';
-import { ErrorTypeEnum } from '../src/error-type-chercker/error-type.enum';
+import { checkErrorType } from '../src/error-type-checker/check-error-type';
+import { ErrorTypeEnum } from '../src/error-type-checker/error-type.enum';
 import { AuthError } from '../src/errors';
 
 describe('checkErrorType', () => {
