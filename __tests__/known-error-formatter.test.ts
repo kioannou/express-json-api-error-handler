@@ -4,7 +4,6 @@ import { AuthError } from '../src/errors';
 describe('KnownErrorFormatter', () => {
   test('format successfully ', () => {
     const mockError = new AuthError('Unauthorized user!', '1000');
-    const mockMeta = { requestId: '12345' };
     const expected = {
       "errors": [
         {
@@ -17,10 +16,8 @@ describe('KnownErrorFormatter', () => {
       "jsonApiVersion": {
         "version": "1.0"
       },
-      "meta": {
-        "request_id": "12345"
-      }
+      "meta": {}
     };
-    expect(KnownErrorFormatter.format(mockError, mockMeta)).toEqual(expected);
+    expect(KnownErrorFormatter.format(mockError)).toEqual(expected);
   });
 });

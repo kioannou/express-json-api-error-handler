@@ -3,7 +3,6 @@ import { UknownErrorFormatter } from '../src/error-formatters/uknown-error-forma
 describe('StringErrorFormatter', () => {
   test('format successfully ', () => {
     const mockError = { 'unknownProperty' : 5555 };
-    const mockMeta = { 'requestId' : "12345" };
     const expected = {
       "errors": [
         {
@@ -17,10 +16,8 @@ describe('StringErrorFormatter', () => {
       "jsonApiVersion": {
         "version": "1.0"
       },
-      "meta": {
-        "request_id": "12345"
-      }
+      "meta": {}
     };
-    expect(UknownErrorFormatter.format(mockError, mockMeta)).toEqual(expected);
+    expect(UknownErrorFormatter.format(mockError)).toEqual(expected);
   });
 });

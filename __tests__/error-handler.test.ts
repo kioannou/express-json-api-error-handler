@@ -1,9 +1,16 @@
 import { errorHandler } from '../src';
 import { IAxiosError } from '../src/models/axios/axios-error.interface';
+import { next } from './__mocks__/next.mock';
+import { req } from './__mocks__/req.mock';
+import { res } from './__mocks__/res.mock';
 
 describe('error-handler', () => {
   test('send the formatted error successfully', () => {
+
+    // The mock error
     const mockError = {
+      config: {},
+      message: {},
       request: {},
       response: {
         data: {
@@ -15,7 +22,10 @@ describe('error-handler', () => {
           },
         },
       },
+      stack : {},
     } as IAxiosError;
+
+    // The expected error
     const expected = {
       'errors': [
         {
@@ -32,7 +42,13 @@ describe('error-handler', () => {
         'request_id': '12345',
       },
     };
-    const mockRes = { locals: { requestId: 12345 } };
-    expect(errorHandler(mockError, {}, mockRes, {})).toEqual(expected);
+
+    // Spying the result
+    const spy = jest.spyOn(res, 'json');
+
+    // Added the the request id to the res
+    res.locals.requestId = 12345;
+    errorHandler(mockError, req, res, next);
+    expect(spy).toHaveBeenCalledWith(expected);
   });
 });

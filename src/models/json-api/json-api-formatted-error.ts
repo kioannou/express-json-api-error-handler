@@ -6,9 +6,9 @@ export class JsonApiWrappedError implements IJsonApiWrappedError {
   public meta: any;
   public jsonApiVersion: IJsonApiVersion;
 
-  constructor(errors: IJsonApiError[], jsonApiVersion: IJsonApiVersion, meta: any) {
+  constructor(errors: IJsonApiError[], jsonApiVersion: IJsonApiVersion, meta?: any) {
     this.errors = errors;
-    this.meta = meta;
+    this.meta = meta || {};
     this.jsonApiVersion = jsonApiVersion;
   }
 }

@@ -3,7 +3,7 @@ import { JsonApiErrorFormatter } from './json-api-error-formatter';
 import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error';
 
 export class StringErrorFormatter {
-  public static format(error: string, meta?: any): JsonApiWrappedError {
+  public static format(error: string): JsonApiWrappedError {
 
     const jsonApiError: IJsonApiError = {
       code: '1000',
@@ -12,7 +12,7 @@ export class StringErrorFormatter {
       title: 'Internal Error (String)'
     };
 
-    return JsonApiErrorFormatter.format(jsonApiError, meta);
+    return JsonApiErrorFormatter.format(jsonApiError);
 
   }
 }

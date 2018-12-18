@@ -8,31 +8,33 @@ import { ErrorTypeEnum } from './error-type-checker/error-type.enum';
 import { getRequestId } from './helpers/get-request-id';
 import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
+import { MetaBuilder } from './meta-builder/meta-builder';
 
 export function errorHandler(error: any, req: any, res: any, next: any) {
-  const requestId = getRequestId(res);
 
   const errorType: ErrorTypeEnum = checkErrorType(error);
 
   let formattedError: JsonApiWrappedError;
-  const meta = { requestId }; // TODO: Pass the meta as options externally
 
   switch (errorType) {
     case ErrorTypeEnum.AxiosError:
-      formattedError = AxiosErrorFormatter.format(error, meta);
+      formattedError = AxiosErrorFormatter.format(error);
       break;
     case ErrorTypeEnum.JsonApiError:
-      formattedError = JsonApiErrorFormatter.format(error, meta);
+      formattedError = JsonApiErrorFormatter.format(error);
       break;
     case ErrorTypeEnum.KnownError:
-      formattedError = KnownErrorFormatter.format(error, meta);
+      formattedError = KnownErrorFormatter.format(error);
       break;
     case ErrorTypeEnum.StringError:
-      formattedError = StringErrorFormatter.format(error, meta);
+      formattedError = StringErrorFormatter.format(error);
       break;
     default:
-      formattedError = UknownErrorFormatter.format(error, meta);
+      formattedError = UknownErrorFormatter.format(error);
   }
+
+  // Calculating meta
+  formattedError.meta = MetaBuilder.build(res);
 
   Sender.sendResponse(res, formattedError);
 }

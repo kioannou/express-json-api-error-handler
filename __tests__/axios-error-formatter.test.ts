@@ -16,7 +16,6 @@ describe('AxiosErrorFormatter', () => {
         },
       },
     } as IAxiosError;
-    const mockMeta = { requestId: '12345' };
     const expected = {
       "errors": [
         {
@@ -29,10 +28,8 @@ describe('AxiosErrorFormatter', () => {
       "jsonApiVersion": {
         "version": "1.0"
       },
-      "meta": {
-        "request_id": "12345"
-      }
+      "meta": {}
     };
-    expect(AxiosErrorFormatter.format(mockError, mockMeta)).toEqual(expected);
+    expect(AxiosErrorFormatter.format(mockError)).toEqual(expected);
   });
 });

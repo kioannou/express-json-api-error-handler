@@ -3,7 +3,6 @@ import { StringErrorFormatter } from '../src/error-formatters/string-error-forma
 describe('StringErrorFormatter', () => {
   test('format successfully ', () => {
     const mockError = 'String error!';
-    const mockMeta = { requestId: '12345' };
     const expected = {
       "errors": [
         {
@@ -16,10 +15,8 @@ describe('StringErrorFormatter', () => {
       "jsonApiVersion": {
         "version": "1.0"
       },
-      "meta": {
-        "request_id": "12345"
-      }
+      "meta": {}
     };
-    expect(StringErrorFormatter.format(mockError, mockMeta)).toEqual(expected);
+    expect(StringErrorFormatter.format(mockError)).toEqual(expected);
   });
 });

@@ -1,4 +1,4 @@
-import { IJsonApiError } from '../../../lib/models/json-api/json-api-error.interface';
+import { IJsonApiError } from './json-api-error.interface';
 
 export interface IJsonApiWrappedError {
   errors: IJsonApiError[];

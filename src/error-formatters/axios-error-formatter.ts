@@ -7,13 +7,13 @@ type NullableJsonApiError = IJsonApiError | null;
 
 export class AxiosErrorFormatter {
 
-  public static format(error: IAxiosError, meta?: any): JsonApiWrappedError {
+  public static format(error: IAxiosError): JsonApiWrappedError {
     // When it's axios. The JSON:APi error usually lies on response object
 
     const jsonApiError = this.checkJsonApiErrorExists(error);
 
     if (jsonApiError) {
-      return JsonApiErrorFormatter.format(jsonApiError, meta);
+      return JsonApiErrorFormatter.format(jsonApiError);
     } else {
       return new JsonApiWrappedError(
         [],

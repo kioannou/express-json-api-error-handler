@@ -4,7 +4,7 @@ import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error
 import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 export class KnownErrorFormatter {
-  public static format(error: BasicError, meta?: any): JsonApiWrappedError {
+  public static format(error: BasicError): JsonApiWrappedError {
 
     const jsonApiError: IJsonApiError = {};
 
@@ -24,7 +24,7 @@ export class KnownErrorFormatter {
       jsonApiError.status = error.status;
     }
 
-    return JsonApiErrorFormatter.format(jsonApiError, meta);
+    return JsonApiErrorFormatter.format(jsonApiError);
 
   }
 }
