@@ -1,9 +1,9 @@
 import { objectHasProperty } from '../util/object-has-property';
 
-export function getRequestId(res: any): string[] {
-  let requestIdArray = [];
-  if (objectHasProperty(res, 'requestId')) {
-    requestIdArray = res.locals.requestId;
+export function getRequestId(res: any): string {
+  let requestId = null;
+  if (objectHasProperty(res.locals, 'requestId')) {
+    requestId = res.locals.requestId;
   }
-  return requestIdArray;
+  return requestId;
 }

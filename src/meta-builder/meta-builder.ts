@@ -5,7 +5,7 @@ export class MetaBuilder {
     const meta: any = {};
 
     // Adding the request id
-    meta.request_id = getRequestId(res);
+    meta.request_id = getRequestId(res).toString();
 
 
     return meta;
