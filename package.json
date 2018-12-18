@@ -1,7 +1,7 @@
 {
   "name": "express-json-api-error-handler",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Middleware for error handling",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kioannou/express-error-handler.git"
+    "url": "https://github.com/kioannou/express-json-api-error-handler"
   },
   "author": "Konstantinos Ioannou <konsioannou@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kioannou/express-error-handler/issues"
+    "url": "https://github.com/kioannou/express-json-api-error-handler/issues"
   },
-  "homepage": "https://github.com/kioannou/express-error-handler#readme",
+  "homepage": "https://github.com/kioannou/express-json-api-error-handler#readme",
   "devDependencies": {
     "@types/jest": "^23.3.10",
     "jest": "^23.6.0",
