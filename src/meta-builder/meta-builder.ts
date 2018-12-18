@@ -7,7 +7,6 @@ export class MetaBuilder {
     // Adding the request id
     meta.request_id = getRequestId(res).toString();
 
-
     return meta;
   }
 }

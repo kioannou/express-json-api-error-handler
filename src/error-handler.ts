@@ -5,13 +5,11 @@ import { StringErrorFormatter } from './error-formatters/string-error-formatter'
 import { UknownErrorFormatter } from './error-formatters/uknown-error-formatter';
 import { checkErrorType } from './error-type-checker/check-error-type';
 import { ErrorTypeEnum } from './error-type-checker/error-type.enum';
-import { getRequestId } from './helpers/get-request-id';
 import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
 import { MetaBuilder } from './meta-builder/meta-builder';
 
 export function errorHandler(error: any, req: any, res: any, next: any) {
-
   const errorType: ErrorTypeEnum = checkErrorType(error);
 
   let formattedError: JsonApiWrappedError;

@@ -4,7 +4,6 @@ import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 export class UknownErrorFormatter {
   public static format(error: any): JsonApiWrappedError {
-
     const jsonApiError: IJsonApiError = {
       code: '1000',
       detail: 'More info on meta property!',
