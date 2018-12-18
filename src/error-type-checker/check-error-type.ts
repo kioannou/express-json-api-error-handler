@@ -1,7 +1,7 @@
-import { ErrorTypeEnum } from './error-type.enum';
-import { checkJsonApiError } from './error-type-guards/json-api-error.guard';
 import { checkAxiosError } from './error-type-guards/axios-error.guard';
 import { checkKnownError } from './error-type-guards/check-known-error.guard';
+import { checkJsonApiError } from './error-type-guards/json-api-error.guard';
+import { ErrorTypeEnum } from './error-type.enum';
 
 export function checkErrorType(error: any): ErrorTypeEnum {
   let type: ErrorTypeEnum;

@@ -1,6 +1,6 @@
 import { IJsonApiError } from '../models/json-api/json-api-error.interface';
-import { JsonApiErrorFormatter } from './json-api-error-formatter';
 import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error';
+import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 export class StringErrorFormatter {
   public static format(error: string): JsonApiWrappedError {
