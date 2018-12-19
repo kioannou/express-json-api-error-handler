@@ -8,9 +8,12 @@ import { ErrorTypeEnum } from './error-type-checker/error-type.enum';
 import { MetaBuilder } from './meta-builder/meta-builder';
 import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
+import { ErrorEventEmitter } from "./error-event-emitter/error-event-emitter";
 
 export function errorHandler(error: any, req: any, res: any, next: any) {
   const errorType: ErrorTypeEnum = checkErrorType(error);
+
+  const errorEventEmitter = new ErrorEventEmitter();
 
   let formattedError: JsonApiWrappedError;
 
@@ -33,6 +36,8 @@ export function errorHandler(error: any, req: any, res: any, next: any) {
 
   // Calculating meta
   formattedError.meta = MetaBuilder.build(res);
+
+  errorEventEmitter.emit('errorEmission');
 
   Sender.sendResponse(res, formattedError);
 }
