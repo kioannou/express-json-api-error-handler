@@ -13,11 +13,15 @@ import { Sender } from './sender/sender';
 
 export class ErrorHandler {
   private readonly ERROR_EVENT = 'errorEmission';
-  private options: IErrorHandlerOptions | undefined;
+  private readonly options: IErrorHandlerOptions | undefined;
   private eventEmitter: EventEmitter;
 
+  private defaultOptions: IErrorHandlerOptions = {
+    buildMeta: false,
+  };
+
   constructor(options?: IErrorHandlerOptions) {
-    this.options = options;
+    this.options = options || this.defaultOptions;
     this.eventEmitter = new EventEmitter();
   }
 
