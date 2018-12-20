@@ -1,14 +1,14 @@
-import { errorHandler } from '../src';
+import { ErrorHandler } from '../src';
 import { IAxiosError } from '../src/models/axios/axios-error.interface';
 import { next } from './__mocks__/next.mock';
 import { req } from './__mocks__/req.mock';
 import { res } from './__mocks__/res.mock';
 
 describe('error-handler', () => {
-  test('send the formatted error successfully', () => {
-
-    // The mock error
-    const mockError = {
+  let mockError: any;
+  let expected: any;
+  beforeAll(() => {
+    mockError = {
       config: {},
       message: {},
       request: {},
@@ -24,9 +24,7 @@ describe('error-handler', () => {
       },
       stack : {},
     } as IAxiosError;
-
-    // The expected error
-    const expected = {
+    expected = {
       'errors': [
         {
           'code': '1200',
@@ -42,13 +40,27 @@ describe('error-handler', () => {
         'request_id': '12345',
       },
     };
+  });
+
+  test('send the formatted error successfully', () => {
 
     // Spying the result
     const spy = jest.spyOn(res, 'json');
 
     // Added the the request id to the res
     res.locals.requestId = 12345;
-    errorHandler(mockError, req, res, next);
+    const errorHandler = new ErrorHandler();
+    errorHandler.handle(mockError, req, res, next);
     expect(spy).toHaveBeenCalledWith(expected);
+  });
+
+  test('emits successfully the error event', () => {
+    res.locals.requestId = 12345;
+    const errorHandler = new ErrorHandler();
+    errorHandler.setErrorEventHandler((err: any) => {
+      const result = JSON.parse(err); // TODO: its stringifies the result ?
+      expect(result).toEqual(expected);
+    });
+    errorHandler.handle(mockError, req, res, next);
   });
 });

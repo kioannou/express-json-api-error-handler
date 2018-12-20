@@ -14,7 +14,8 @@ export class AxiosErrorFormatter {
     if (jsonApiError) {
       return JsonApiErrorFormatter.format(jsonApiError);
     } else {
-      return new JsonApiWrappedError([], { version: '1.0' }, { reason: 'No error found in response' }); // TODO: Better fallback if there is no error. Maybe log it internally
+      return new JsonApiWrappedError([], { version: '1.0' }, { reason: 'No error found in response' });
+      // TODO: Better fallback if there is no error. Maybe log it internally
     }
   }
 
