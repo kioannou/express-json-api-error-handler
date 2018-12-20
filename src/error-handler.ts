@@ -12,12 +12,12 @@ import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error'
 import { Sender } from './sender/sender';
 
 export class ErrorHandler {
-
   private readonly ERROR_EVENT = 'errorEmission';
-
+  private options: IErrorHandlerOptions | undefined;
   private eventEmitter: EventEmitter;
 
   constructor(options?: IErrorHandlerOptions) {
+    this.options = options;
     this.eventEmitter = new EventEmitter();
   }
 
@@ -48,7 +48,7 @@ export class ErrorHandler {
     }
 
     // Calculating meta
-    formattedError.meta = MetaBuilder.build(res);
+    formattedError.meta = this.options && this.options.buildMeta ? MetaBuilder.build(res) : {};
 
     this.eventEmitter.emit(this.ERROR_EVENT, JSON.stringify(formattedError));
 

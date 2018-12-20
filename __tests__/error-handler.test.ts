@@ -22,7 +22,7 @@ describe('error-handler', () => {
           },
         },
       },
-      stack : {},
+      stack: {},
     } as IAxiosError;
     expected = {
       'errors': [
@@ -49,14 +49,14 @@ describe('error-handler', () => {
 
     // Added the the request id to the res
     res.locals.requestId = 12345;
-    const errorHandler = new ErrorHandler();
+    const errorHandler = new ErrorHandler({ buildMeta: true });
     errorHandler.handle(mockError, req, res, next);
     expect(spy).toHaveBeenCalledWith(expected);
   });
 
   test('emits successfully the error event', () => {
     res.locals.requestId = 12345;
-    const errorHandler = new ErrorHandler();
+    const errorHandler = new ErrorHandler({ buildMeta: true });
     errorHandler.setErrorEventHandler((err: any) => {
       const result = JSON.parse(err); // TODO: its stringifies the result ?
       expect(result).toEqual(expected);
