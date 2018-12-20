@@ -25,11 +25,11 @@ export class ErrorHandler {
     this.eventEmitter = new EventEmitter();
   }
 
-  public setErrorEventHandler(cb: any) {
+  public setErrorEventHandler = (cb: any) => {
     this.eventEmitter.on(this.ERROR_EVENT, cb);
-  }
+  };
 
-  public handle(error: any, req: any, res: any, next: any) {
+  public handle = (error: any, req: any, res: any, next: any) => {
     const errorType: ErrorTypeEnum = checkErrorType(error);
 
     let formattedError: JsonApiWrappedError;
