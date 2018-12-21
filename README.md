@@ -1,5 +1,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Build Status](https://travis-ci.com/kioannou/express-json-api-error-handler.svg?branch=master)](https://travis-ci.com/kioannou/express-json-api-error-handler)
+[![codecov](https://codecov.io/gh/kioannou/express-json-api-error-handler/branch/master/graph/badge.svg)](https://codecov.io/gh/kioannou/express-json-api-error-handler)
+
 # Express JSON:API Error Handler
 
 Error handling middleware for Node/Express applications. All detected errors are finally transformed into JSON:API errors.
