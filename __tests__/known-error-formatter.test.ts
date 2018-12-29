@@ -13,7 +13,7 @@ describe('KnownErrorFormatter', () => {
           "title": "Authentication Error"
         }
       ],
-      "jsonApiVersion": {
+      "jsonapi": {
         "version": "1.0"
       },
       "meta": {}

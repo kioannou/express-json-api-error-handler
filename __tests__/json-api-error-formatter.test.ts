@@ -15,7 +15,7 @@ describe('JsonApiErrorFormatter', () => {
         'description': 'Mock error description',
         'statusCode': '403',
         'title': 'Error 403',
-      }], 'jsonApiVersion': { 'version': '1.0' }, 'meta': {}
+      }], 'jsonapi': { 'version': '1.0' }, 'meta': {}
     };
     expect(JsonApiErrorFormatter.format(mockError)).toEqual(expected);
   });

@@ -25,7 +25,7 @@ describe('AxiosErrorFormatter', () => {
           "title": "Error 403"
         }
       ],
-      "jsonApiVersion": {
+      "jsonapi": {
         "version": "1.0"
       },
       "meta": {}

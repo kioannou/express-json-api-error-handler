@@ -12,7 +12,7 @@ describe('StringErrorFormatter', () => {
           "title": "Internal Error (String)"
         }
       ],
-      "jsonApiVersion": {
+      "jsonapi": {
         "version": "1.0"
       },
       "meta": {}
