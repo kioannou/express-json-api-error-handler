@@ -3,7 +3,7 @@ import { IJsonApiError } from './json-api-error.interface';
 export interface IJsonApiWrappedError {
   errors: IJsonApiError[];
   meta: any;
-  jsonApiVersion: IJsonApiVersion;
+  jsonapi: IJsonApiVersion;
 }
 
 export interface IJsonApiVersion {

@@ -52,7 +52,7 @@ The error the handler produces is of the following structure
           'title': 'Error 403',
         },
       ],
-      'jsonApiVersion': {
+      'jsonapi': {
         'version': '1.0',
       },
       'meta': {

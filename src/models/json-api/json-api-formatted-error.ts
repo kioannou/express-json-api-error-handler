@@ -4,11 +4,11 @@ import { IJsonApiVersion, IJsonApiWrappedError } from './json-api-wrapped-error.
 export class JsonApiWrappedError implements IJsonApiWrappedError {
   public errors: IJsonApiError[];
   public meta: any;
-  public jsonApiVersion: IJsonApiVersion;
+  public jsonapi: IJsonApiVersion;
 
   constructor(errors: IJsonApiError[], jsonApiVersion: IJsonApiVersion, meta?: any) {
     this.errors = errors;
     this.meta = meta || {};
-    this.jsonApiVersion = jsonApiVersion;
+    this.jsonapi = jsonApiVersion;
   }
 }
