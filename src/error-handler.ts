@@ -54,7 +54,7 @@ export class ErrorHandler {
     // Calculating meta
     formattedError.meta = this.options && this.options.buildMeta ? MetaBuilder.build(res) : {};
 
-    this.eventEmitter.emit(this.ERROR_EVENT, JSON.stringify(formattedError));
+    this.eventEmitter.emit(this.ERROR_EVENT, formattedError);
 
     Sender.sendResponse(res, formattedError);
   }

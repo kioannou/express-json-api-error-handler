@@ -58,8 +58,7 @@ describe('error-handler', () => {
     res.locals.requestId = 12345;
     const errorHandler = new ErrorHandler({ buildMeta: true });
     errorHandler.setErrorEventHandler((err: any) => {
-      const result = JSON.parse(err); // TODO: its stringifies the result ?
-      expect(result).toEqual(expected);
+      expect(err).toEqual(expected);
     });
     errorHandler.handle(mockError, req, res, next);
   });
