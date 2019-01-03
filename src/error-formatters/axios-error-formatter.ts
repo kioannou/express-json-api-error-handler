@@ -1,8 +1,8 @@
 import { IAxiosError } from '../models/axios/axios-error.interface';
 import { IJsonApiError } from '../models/json-api/json-api-error.interface';
+import { JsonApiError } from '../models/json-api/json-api-error.model';
 import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error';
 import { JsonApiErrorFormatter } from './json-api-error-formatter';
-import { JsonApiError } from '../models/json-api/json-api-error.model';
 
 type NullableJsonApiError = IJsonApiError | null;
 
@@ -19,12 +19,12 @@ export class AxiosErrorFormatter {
       // Create a new JSON:API error and pass it to JsonApiErrorFormatter
       const obj: IJsonApiError = {
         code: error.code,
-        title: `Axios Error: ${error.code || 'NOT AVAILABLE'}`,
         detail: error.message,
         source: error.stack,
+        title: `Axios Error: ${error.code || 'NOT AVAILABLE'}`,
       };
-      const jsonApiError = new JsonApiError(obj);
-      return JsonApiErrorFormatter.format(jsonApiError);
+      const defaultError = new JsonApiError(obj);
+      return JsonApiErrorFormatter.format(defaultError);
     }
   }
 

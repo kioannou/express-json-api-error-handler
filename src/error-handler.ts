@@ -9,8 +9,8 @@ import { ErrorTypeEnum } from './error-type-checker/error-type.enum';
 import { MetaBuilder } from './meta-builder/meta-builder';
 import { IErrorHandlerOptions } from './models/error-handler-options.interface';
 import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
-import { Sender } from './sender/sender';
 import { SafeChecker } from './safe-checker/safe-checker';
+import { Sender } from './sender/sender';
 
 export class ErrorHandler {
   private readonly ERROR_EVENT = 'errorEmission';

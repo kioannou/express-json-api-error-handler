@@ -1,14 +1,14 @@
 import { IJsonApiError } from './json-api-error.interface';
 
 export class JsonApiError implements IJsonApiError {
-  id: string;
-  code: string;
-  detail: string;
-  links: any;
-  meta: any;
-  source: any;
-  status: any;
-  title: string;
+  public id: string;
+  public code: string;
+  public detail: string;
+  public links: any;
+  public meta: any;
+  public source: any;
+  public status: any;
+  public title: string;
 
   constructor(obj?: any) {
     this.id = (obj && obj.id) || null;
