@@ -10,7 +10,7 @@ import { MetaBuilder } from './meta-builder/meta-builder';
 import { IErrorHandlerOptions } from './models/error-handler-options.interface';
 import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
-import { SafeChecker } from "./safe-checker/safe-checker";
+import { SafeChecker } from './safe-checker/safe-checker';
 
 export class ErrorHandler {
   private readonly ERROR_EVENT = 'errorEmission';
@@ -54,7 +54,7 @@ export class ErrorHandler {
 
     const thereAreNoErrors: boolean = SafeChecker.checkIsEmpty(formattedError);
 
-    if(thereAreNoErrors) {
+    if (thereAreNoErrors) {
       const safeChecker = new SafeChecker();
       const defaultError = safeChecker.getDefaultError();
       formattedError.errors.push(defaultError);
@@ -66,5 +66,5 @@ export class ErrorHandler {
     this.eventEmitter.emit(this.ERROR_EVENT, formattedError);
 
     Sender.sendResponse(res, formattedError);
-  }
+  };
 }
