@@ -10,6 +10,7 @@ import { MetaBuilder } from './meta-builder/meta-builder';
 import { IErrorHandlerOptions } from './models/error-handler-options.interface';
 import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
+import { SafeChecker } from "./safe-checker/safe-checker";
 
 export class ErrorHandler {
   private readonly ERROR_EVENT = 'errorEmission';
@@ -49,6 +50,14 @@ export class ErrorHandler {
         break;
       default:
         formattedError = UknownErrorFormatter.format(error);
+    }
+
+    const thereAreNoErrors: boolean = SafeChecker.checkIsEmpty(formattedError);
+
+    if(thereAreNoErrors) {
+      const safeChecker = new SafeChecker();
+      const defaultError = safeChecker.getDefaultError();
+      formattedError.errors.push(defaultError);
     }
 
     // Calculating meta
