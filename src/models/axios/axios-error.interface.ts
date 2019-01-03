@@ -1,4 +1,5 @@
 export interface IAxiosError {
+  code?: string;
   config: object;
   message: string;
   request: any;

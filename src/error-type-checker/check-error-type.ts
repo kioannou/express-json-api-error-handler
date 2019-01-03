@@ -8,12 +8,12 @@ export function checkErrorType(error: any): ErrorTypeEnum {
 
   if (typeof error === 'string' || error instanceof String) {
     type = ErrorTypeEnum.StringError;
-  } else if (checkJsonApiError(error)) {
-    type = ErrorTypeEnum.JsonApiError;
   } else if (checkAxiosError(error)) {
     type = ErrorTypeEnum.AxiosError;
   } else if (checkKnownError(error)) {
     type = ErrorTypeEnum.KnownError;
+  } else if (checkJsonApiError(error)) {
+    type = ErrorTypeEnum.JsonApiError;
   } else {
     type = ErrorTypeEnum.UnknownError;
   }

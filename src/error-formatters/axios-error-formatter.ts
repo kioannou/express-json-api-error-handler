@@ -2,32 +2,49 @@ import { IAxiosError } from '../models/axios/axios-error.interface';
 import { IJsonApiError } from '../models/json-api/json-api-error.interface';
 import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error';
 import { JsonApiErrorFormatter } from './json-api-error-formatter';
+import { JsonApiError } from "../models/json-api/json-api-error.model";
 
 type NullableJsonApiError = IJsonApiError | null;
 
 export class AxiosErrorFormatter {
-  public static format(error: IAxiosError): JsonApiWrappedError {
-    // When it's axios. The JSON:APi error usually lies on response object
+    public static format(error: IAxiosError): JsonApiWrappedError {
+        // When it's axios error: If there is an (JSON:API) error, usually it lies in response.data
+        // If there is not handle it as an axios error
 
-    const jsonApiError = this.checkJsonApiErrorExists(error);
+        const jsonApiError = this.checkJsonApiErrorExists(error);
 
-    if (jsonApiError) {
-      return JsonApiErrorFormatter.format(jsonApiError);
-    } else {
-      return new JsonApiWrappedError([], { version: '1.0' }, { reason: 'No error found in response' });
-      // TODO: Better fallback if there is no error. Maybe log it internally
+        if (jsonApiError) {
+            return JsonApiErrorFormatter.format(jsonApiError);
+        } else {
+            // Create a new JSON:API error and pass it to JsonApiErrorFormatter
+            const obj: IJsonApiError = {
+                code: error.code,
+                title: `Axios Error: ${error.code || 'NOT AVAILABLE'}`,
+                detail: error.message,
+                source: error.stack,
+            };
+            const jsonApiError = new JsonApiError(obj);
+            return JsonApiErrorFormatter.format(jsonApiError);
+        }
     }
-  }
 
-  private static checkJsonApiErrorExists(error: IAxiosError): NullableJsonApiError {
-    let jsonApiError: NullableJsonApiError = null; // The main error isolated and formatted
+    private static checkJsonApiErrorExists(error: IAxiosError): NullableJsonApiError {
+        let jsonApiError: NullableJsonApiError = null; // The main error isolated and formatted
 
-    if (error.response.data.errors instanceof Array) {
-      jsonApiError = error.response.data.errors[0];
-    } else {
-      jsonApiError = error.response.data.errors;
+        if (!error.response
+            || !error.response.hasOwnProperty('data')
+            || !error.response.data.hasOwnProperty('errors')) {
+            return jsonApiError; // null
+        }
+
+        const isArray = error.response.data.errors instanceof Array;
+
+        if (isArray && !error.response.data.errors.length) {
+            return jsonApiError; // null
+        }
+
+        jsonApiError = isArray ? error.response.data.errors[0] : error.response.data.errors;
+
+        return jsonApiError;
     }
-
-    return jsonApiError;
-  }
 }
