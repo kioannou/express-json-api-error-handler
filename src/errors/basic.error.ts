@@ -6,9 +6,9 @@ export class BasicError implements Error {
   public status: number;
   public name: string;
 
-  constructor(message: string, code: NullableString, status: number, name: string) {
+  constructor(message: string, code: number, status: number, name: string) {
     this.message = message;
-    this.code = code;
+    this.code = code ? code.toString() : null;
     this.status = status;
     this.name = name;
   }

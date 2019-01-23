@@ -71,7 +71,7 @@ You can use them like this
 ```typescript
 import { AuthError } from `express-json-api-error-handler`;
 
-next(new AuthError('The user is not authorized!'))
+next(new AuthError('The user is not authorized!', 5555))
 
 ```
 

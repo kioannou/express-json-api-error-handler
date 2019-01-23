@@ -3,7 +3,7 @@ import { AuthError } from '../src/errors';
 
 describe('KnownErrorFormatter', () => {
   test('format successfully ', () => {
-    const mockError = new AuthError('Unauthorized user!', '1000');
+    const mockError = new AuthError('Unauthorized user!', 1000);
     const expected = {
       "errors": [
         {

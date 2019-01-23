@@ -9,7 +9,7 @@ export class SafeChecker {
   private DEFAULT_ERROR = new JsonApiError({
     code: 1000,
     details:
-        "The current mock error acts as a empty placeholder for empty errors body. There was an error that couldn't be handled by the library.",
+      "The current mock error acts as a empty placeholder for empty errors body. There was an error that couldn't be handled by the library.",
     status: 500,
     title: 'Unhandled error',
   });
