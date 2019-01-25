@@ -3,25 +3,22 @@ import { AxiosErrorFormatter } from './error-formatters/axios-error-formatter';
 import { JsonApiErrorFormatter } from './error-formatters/json-api-error-formatter';
 import { KnownErrorFormatter } from './error-formatters/known-error-formatter';
 import { StringErrorFormatter } from './error-formatters/string-error-formatter';
-import { UknownErrorFormatter } from './error-formatters/uknown-error-formatter';
+import { UnknownErrorFormatter } from './error-formatters/unknown-error-formatter';
 import { checkErrorType } from './error-type-checker/check-error-type';
-import { ErrorTypeEnum } from './error-type-checker/error-type.enum';
+import { ErrorType } from './error-type-checker/error-type.enum';
 import { MetaBuilder } from './meta-builder/meta-builder';
-import { IErrorHandlerOptions } from './models/error-handler-options.interface';
-import { JsonApiWrappedError } from './models/json-api/json-api-formatted-error';
-import { SafeChecker } from './safe-checker/safe-checker';
+import { ErrorHandlerOptions } from './models/error-handler-options/error-handler-options.model';
+import { JsonApiFormattedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
 
 export class ErrorHandler {
   private readonly ERROR_EVENT = 'errorEmission';
-  private readonly options: IErrorHandlerOptions | undefined;
+  private readonly options: ErrorHandlerOptions;
   private eventEmitter: EventEmitter;
 
-  private defaultOptions: IErrorHandlerOptions = {
-    buildMeta: false,
-  };
+  private defaultOptions: ErrorHandlerOptions = new ErrorHandlerOptions();
 
-  constructor(options?: IErrorHandlerOptions) {
+  constructor(options?: ErrorHandlerOptions) {
     this.options = options || this.defaultOptions;
     this.eventEmitter = new EventEmitter();
   }
@@ -31,33 +28,27 @@ export class ErrorHandler {
   };
 
   public handle = (error: any, req: any, res: any, next: any) => {
-    const errorType: ErrorTypeEnum = checkErrorType(error);
 
-    let formattedError: JsonApiWrappedError;
+    // Checking for the type of the error
+    const errorType: ErrorType = checkErrorType(error);
+
+    let formattedError: JsonApiFormattedError;
 
     switch (errorType) {
-      case ErrorTypeEnum.AxiosError:
+      case ErrorType.AxiosError:
         formattedError = AxiosErrorFormatter.format(error);
         break;
-      case ErrorTypeEnum.JsonApiError:
+      case ErrorType.JsonApiError:
         formattedError = JsonApiErrorFormatter.format(error);
         break;
-      case ErrorTypeEnum.KnownError:
+      case ErrorType.KnownError:
         formattedError = KnownErrorFormatter.format(error);
         break;
-      case ErrorTypeEnum.StringError:
+      case ErrorType.StringError:
         formattedError = StringErrorFormatter.format(error);
         break;
       default:
-        formattedError = UknownErrorFormatter.format(error);
-    }
-
-    const thereAreNoErrors: boolean = SafeChecker.checkIsEmpty(formattedError);
-
-    if (thereAreNoErrors) {
-      const safeChecker = new SafeChecker();
-      const defaultError = safeChecker.getDefaultError();
-      formattedError.errors.push(defaultError);
+        formattedError = UnknownErrorFormatter.format(error);
     }
 
     // Calculating meta

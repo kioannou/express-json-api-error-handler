@@ -1,16 +1,17 @@
 import { IJsonApiError } from '../models/json-api/json-api-error.interface';
-import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error';
+import { JsonApiError } from '../models/json-api/json-api-error.model';
+import { JsonApiFormattedError } from '../models/json-api/json-api-formatted-error';
 
 export class JsonApiErrorFormatter {
-  public static format(error: IJsonApiError): JsonApiWrappedError {
+  public static format(error: JsonApiError): JsonApiFormattedError {
     return JsonApiErrorFormatter.buildError(error);
   }
 
-  private static buildError(error: IJsonApiError): JsonApiWrappedError {
+  private static buildError(error: JsonApiError): JsonApiFormattedError {
     // Getting the JSON:API and wrapping it to JSON:API wrapped error
     // TODO: Support more errors in future
     const errors: IJsonApiError[] = [];
     errors.push(error);
-    return new JsonApiWrappedError(errors, { version: '1.0' });
+    return new JsonApiFormattedError(errors, { version: '1.0' });
   }
 }

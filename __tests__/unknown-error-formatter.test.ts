@@ -1,4 +1,4 @@
-import { UknownErrorFormatter } from '../src/error-formatters/uknown-error-formatter';
+import { UnknownErrorFormatter } from '../src/error-formatters/unknown-error-formatter';
 
 describe('StringErrorFormatter', () => {
   test('format successfully ', () => {
@@ -18,6 +18,6 @@ describe('StringErrorFormatter', () => {
       },
       "meta": {}
     };
-    expect(UknownErrorFormatter.format(mockError)).toEqual(expected);
+    expect(UnknownErrorFormatter.format(mockError)).toEqual(expected);
   });
 });

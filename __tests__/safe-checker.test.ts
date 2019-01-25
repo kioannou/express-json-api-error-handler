@@ -1,9 +1,9 @@
 import { SafeChecker } from "../src/safe-checker/safe-checker";
-import { IJsonApiWrappedError } from "../src/models/json-api/json-api-wrapped-error.interface";
+import { IJsonApiFormattedError } from "../src/models/json-api/json-api-formatted-error.interface";
 
 describe('SafeChecker', () => {
     test('checking for empty errors property successfully', () => {
-        const mockError: IJsonApiWrappedError = {
+        const mockError: IJsonApiFormattedError = {
             errors: [],
             meta: {},
             jsonapi: {

@@ -1,4 +1,4 @@
-export enum ErrorTypeEnum {
+export enum ErrorType {
   AxiosError,
   JsonApiError,
   StringError,

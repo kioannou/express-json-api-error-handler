@@ -1,11 +1,11 @@
 import { checkErrorType } from '../src/error-type-checker/check-error-type';
-import { ErrorTypeEnum } from '../src/error-type-checker/error-type.enum';
+import { ErrorType } from '../src/error-type-checker/error-type.enum';
 import { AuthError } from '../src/errors';
 
 describe('checkErrorType', () => {
 
   test('should check string error type successfully', () => {
-    expect(checkErrorType('Message error!')).toEqual(ErrorTypeEnum.StringError);
+    expect(checkErrorType('Message error!')).toEqual(ErrorType.StringError);
   });
 
   test('should check axios error type successfully', () => {
@@ -16,16 +16,16 @@ describe('checkErrorType', () => {
       response: {},
       stack: 'stack',
     };
-    expect(checkErrorType(axiosTestErrorObj)).toEqual(ErrorTypeEnum.AxiosError);
+    expect(checkErrorType(axiosTestErrorObj)).toEqual(ErrorType.AxiosError);
   });
 
   test('should check JSON:API error type successfully', () => {
     const jsonApiTestErrorObj = { 'id': '5555' };
-    expect(checkErrorType(jsonApiTestErrorObj)).toEqual(ErrorTypeEnum.JsonApiError);
+    expect(checkErrorType(jsonApiTestErrorObj)).toEqual(ErrorType.JsonApiError);
   });
 
   test('should check known errors successfully', () => {
     const knownTestError = new AuthError('Unauthorized');
-    expect(checkErrorType(knownTestError)).toEqual(ErrorTypeEnum.KnownError);
+    expect(checkErrorType(knownTestError)).toEqual(ErrorType.KnownError);
   });
 });

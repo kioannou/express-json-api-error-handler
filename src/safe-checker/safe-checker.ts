@@ -1,8 +1,8 @@
 import { JsonApiError } from '../models/json-api/json-api-error.model';
-import { IJsonApiWrappedError } from '../models/json-api/json-api-wrapped-error.interface';
+import { IJsonApiFormattedError } from '../models/json-api/json-api-formatted-error.interface';
 
 export class SafeChecker {
-  public static checkIsEmpty(formattedError: IJsonApiWrappedError): boolean {
+  public static checkIsEmpty(formattedError: IJsonApiFormattedError): boolean {
     return !formattedError.errors || !formattedError.errors.length;
   }
 

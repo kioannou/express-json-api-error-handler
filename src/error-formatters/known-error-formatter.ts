@@ -1,10 +1,10 @@
 import { BasicError } from '../errors/basic.error';
 import { IJsonApiError } from '../models/json-api/json-api-error.interface';
-import { JsonApiWrappedError } from '../models/json-api/json-api-formatted-error';
+import { JsonApiFormattedError } from '../models/json-api/json-api-formatted-error';
 import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 export class KnownErrorFormatter {
-  public static format(error: BasicError): JsonApiWrappedError {
+  public static format(error: BasicError): JsonApiFormattedError {
     const jsonApiError: IJsonApiError = {};
 
     if (error.code) {

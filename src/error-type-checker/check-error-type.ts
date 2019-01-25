@@ -1,21 +1,21 @@
 import { checkAxiosError } from './error-type-guards/axios-error.guard';
 import { checkKnownError } from './error-type-guards/check-known-error.guard';
 import { checkJsonApiError } from './error-type-guards/json-api-error.guard';
-import { ErrorTypeEnum } from './error-type.enum';
+import { ErrorType } from './error-type.enum';
 
-export function checkErrorType(error: any): ErrorTypeEnum {
-  let type: ErrorTypeEnum;
+export function checkErrorType(error: any): ErrorType {
+  let type: ErrorType;
 
   if (typeof error === 'string' || error instanceof String) {
-    type = ErrorTypeEnum.StringError;
+    type = ErrorType.StringError;
   } else if (checkAxiosError(error)) {
-    type = ErrorTypeEnum.AxiosError;
+    type = ErrorType.AxiosError;
   } else if (checkKnownError(error)) {
-    type = ErrorTypeEnum.KnownError;
+    type = ErrorType.KnownError;
   } else if (checkJsonApiError(error)) {
-    type = ErrorTypeEnum.JsonApiError;
+    type = ErrorType.JsonApiError;
   } else {
-    type = ErrorTypeEnum.UnknownError;
+    type = ErrorType.UnknownError;
   }
   return type;
 }
