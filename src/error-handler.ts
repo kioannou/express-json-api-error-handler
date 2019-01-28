@@ -10,6 +10,7 @@ import { MetaBuilder } from './meta-builder/meta-builder';
 import { ErrorHandlerOptions } from './models/error-handler-options/error-handler-options.model';
 import { JsonApiFormattedError } from './models/json-api/json-api-formatted-error';
 import { Sender } from './sender/sender';
+import { AxiosError } from './models/axios/axios-error.model';
 
 export class ErrorHandler {
   private readonly ERROR_EVENT = 'errorEmission';
@@ -29,14 +30,15 @@ export class ErrorHandler {
 
   public handle = (error: any, req: any, res: any, next: any) => {
 
+    let formattedError: JsonApiFormattedError;
+
     // Checking for the type of the error
     const errorType: ErrorType = checkErrorType(error);
 
-    let formattedError: JsonApiFormattedError;
-
     switch (errorType) {
       case ErrorType.AxiosError:
-        formattedError = AxiosErrorFormatter.format(error);
+        const axiosError = new AxiosError(error);
+        formattedError = AxiosErrorFormatter.format(axiosError);
         break;
       case ErrorType.JsonApiError:
         formattedError = JsonApiErrorFormatter.format(error);

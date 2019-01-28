@@ -9,6 +9,10 @@ describe('KnownErrorFormatter', () => {
         {
           "code": "1000",
           "detail": "Unauthorized user!",
+          "id": null,
+          "links": null,
+          "meta": null,
+          "source": null,
           "status": 401,
           "title": "Authentication Error"
         }

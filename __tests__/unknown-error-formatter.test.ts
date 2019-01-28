@@ -8,7 +8,10 @@ describe('StringErrorFormatter', () => {
         {
           "code": "1000",
           "detail": "More info on meta property!",
+          "id": null,
+          "links": null,
           "meta": { 'unknownProperty' : 5555 },
+          "source": null,
           "status": "500",
           "title": "Internal Error",
         }

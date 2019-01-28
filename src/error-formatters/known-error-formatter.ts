@@ -1,28 +1,19 @@
 import { BasicError } from '../errors/basic.error';
-import { IJsonApiError } from '../models/json-api/json-api-error.interface';
+import { JsonApiError } from '../models/json-api/json-api-error.model';
 import { JsonApiFormattedError } from '../models/json-api/json-api-formatted-error';
 import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 export class KnownErrorFormatter {
   public static format(error: BasicError): JsonApiFormattedError {
-    const jsonApiError: IJsonApiError = {};
 
-    if (error.code) {
-      jsonApiError.code = error.code;
-    }
-
-    if (error.name) {
-      jsonApiError.title = error.name;
-    }
-
-    if (error.message) {
-      jsonApiError.detail = error.message;
-    }
-
-    if (error.status) {
-      jsonApiError.status = error.status;
-    }
-
+    // Creating the error object for initializing the JsonApiError
+    const errorObj = {
+      code: error.code,
+      detail: error.message,
+      status: error.status,
+      title: error.name,
+    };
+    const jsonApiError: JsonApiError = new JsonApiError(errorObj);
     return JsonApiErrorFormatter.format(jsonApiError);
   }
 }

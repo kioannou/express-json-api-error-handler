@@ -8,8 +8,12 @@ describe('StringErrorFormatter', () => {
         {
           "code": "1000",
           "detail": "String error!",
+          "id": null,
+          "links": null,
+          "meta": null,
+          "source": null,
           "status": "500",
-          "title": "Internal Error (String)"
+          "title": "Internal Error (String)",
         }
       ],
       "jsonapi": {

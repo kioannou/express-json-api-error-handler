@@ -1,28 +1,28 @@
 import { AxiosErrorFormatter } from '../src/error-formatters/axios-error-formatter';
-import { IAxiosError } from '../src/models/axios/axios-error.interface';
+import { AxiosError } from '../src/models/axios/axios-error.model';
 
 describe('AxiosErrorFormatter', () => {
   test('format successfully an axios error without response error', () => {
 
-    const mockError = {
+    const mockError =  new AxiosError({
       code: 'ERRORCODE',
       message: 'Error code message',
       request: {},
       response: undefined,
       stack: "error/stacktrace"
-    } as IAxiosError;
+    });
 
     const expected = {
       "errors": [
         {
           "code": "ERRORCODE",
           "detail": "Error code message",
-          "status": null,
-          "title": "Axios Error: ERRORCODE",
           "id": null,
           "links": null,
           "meta": null,
           "source": "error/stacktrace",
+          "status": null,
+          "title": "Axios Error: ERRORCODE",
         }
       ],
       "jsonapi": {
@@ -35,7 +35,7 @@ describe('AxiosErrorFormatter', () => {
   });
 
   test('format successfully an axios error with response error',  () => {
-    const mockError = {
+    const mockError =  new AxiosError({
       request: {},
       response: {
         data: {
@@ -47,7 +47,7 @@ describe('AxiosErrorFormatter', () => {
           },
         },
       },
-    } as IAxiosError;
+    });
 
     const expected = {
       "errors": [
