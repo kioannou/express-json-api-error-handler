@@ -1,10 +1,15 @@
-import { AuthError, ForbiddenError, InternalServerError, NotFoundError } from '../../errors';
+import { BasicError } from '../../errors/basic.error';
 
 export function checkKnownError(error: any): boolean {
-  return (
-    error instanceof AuthError ||
-    error instanceof ForbiddenError ||
-    error instanceof InternalServerError ||
-    error instanceof NotFoundError
-  );
+  let isKnownError = false;
+  const candidateError = error as BasicError;
+  if (
+    candidateError.hasOwnProperty('status') &&
+    candidateError.hasOwnProperty('code') &&
+    candidateError.hasOwnProperty('name') &&
+    candidateError.hasOwnProperty('message')
+  ) {
+    isKnownError = true;
+  }
+  return isKnownError;
 }

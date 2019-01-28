@@ -4,11 +4,11 @@ export function checkAxiosError(error: any): boolean {
   let isAxiosError = false;
   const candidateError = error as IAxiosError;
   if (
-    candidateError.config &&
-    candidateError.message &&
-    candidateError.request &&
-    candidateError.response &&
-    candidateError.stack
+    candidateError.hasOwnProperty('config') &&
+    candidateError.hasOwnProperty('message') &&
+    candidateError.hasOwnProperty('request') &&
+    candidateError.hasOwnProperty('response') &&
+    candidateError.hasOwnProperty('stack')
   ) {
     isAxiosError = true;
   }
