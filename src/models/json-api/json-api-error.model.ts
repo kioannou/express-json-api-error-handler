@@ -1,37 +1,36 @@
 import { IJsonApiError } from './json-api-error.interface';
 
 export class JsonApiError implements IJsonApiError {
-
   private static getId(obj: any) {
-    return (obj && obj.hasOwnProperty('id')) ? obj.id : null;
+    return obj && obj.hasOwnProperty('id') ? obj.id : null;
   }
 
   private static getTitle(obj: any) {
-    return (obj && obj.hasOwnProperty('title')) ? obj.title : null;
+    return obj && obj.hasOwnProperty('title') ? obj.title : null;
   }
 
   private static getStatus(obj: any) {
-    return (obj && obj.hasOwnProperty('status')) ? obj.status : null;
+    return obj && obj.hasOwnProperty('status') ? obj.status : null;
   }
 
   private static getSource(obj: any) {
-    return (obj && obj.hasOwnProperty('source')) ? obj.source : null;
+    return obj && obj.hasOwnProperty('source') ? obj.source : null;
   }
 
   private static getMeta(obj: any) {
-    return (obj && obj.hasOwnProperty('meta')) ? obj.meta : null;
+    return obj && obj.hasOwnProperty('meta') ? obj.meta : null;
   }
 
   private static getLinks(obj: any) {
-    return (obj && obj.hasOwnProperty('links')) ? obj.links : null;
+    return obj && obj.hasOwnProperty('links') ? obj.links : null;
   }
 
   private static getDetail(obj: any) {
-    return (obj && obj.hasOwnProperty('detail')) ? obj.detail : null;
+    return obj && obj.hasOwnProperty('detail') ? obj.detail : null;
   }
 
   private static getCode(obj: any) {
-    return (obj && obj.hasOwnProperty('code')) ? obj.code : null;
+    return obj && obj.hasOwnProperty('code') ? obj.code : null;
   }
 
   public id: string;

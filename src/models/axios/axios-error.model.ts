@@ -1,29 +1,28 @@
 import { IAxiosError } from './axios-error.interface';
 
-export class AxiosError implements IAxiosError{
-
+export class AxiosError implements IAxiosError {
   private static getCode(obj: any) {
-    return (obj && obj.hasOwnProperty('code')) ? obj.code : '1000';
+    return obj && obj.hasOwnProperty('code') ? obj.code : '1000';
   }
 
   private static getConfig(obj: any) {
-    return (obj && obj.hasOwnProperty('config')) ? obj.config : {};
+    return obj && obj.hasOwnProperty('config') ? obj.config : {};
   }
 
   private static getMessage(obj: any) {
-    return (obj && obj.hasOwnProperty('message')) ? obj.message : 'No available message';
+    return obj && obj.hasOwnProperty('message') ? obj.message : 'No available message';
   }
 
   private static getRequest(obj: any) {
-    return (obj && obj.hasOwnProperty('request')) ? obj.request : {};
+    return obj && obj.hasOwnProperty('request') ? obj.request : {};
   }
 
   private static getResponse(obj: any) {
-    return (obj && obj.hasOwnProperty('response')) ? obj.response : {};
+    return obj && obj.hasOwnProperty('response') ? obj.response : {};
   }
 
   private static getStack(obj: any) {
-    return (obj && obj.hasOwnProperty('stack')) ? obj.stack : 'No available stack';
+    return obj && obj.hasOwnProperty('stack') ? obj.stack : 'No available stack';
   }
 
   public code: string;

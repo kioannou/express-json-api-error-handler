@@ -3,7 +3,6 @@ import { IJsonApiFormattedError } from './json-api-formatted-error.interface';
 import { JsonApiVersion } from './json-api-version.model';
 
 export class JsonApiFormattedError implements IJsonApiFormattedError {
-
   private static getJsonapi(jsonApiVersion?: JsonApiVersion) {
     return jsonApiVersion || new JsonApiVersion(); // If no version is provided the default one is used
   }

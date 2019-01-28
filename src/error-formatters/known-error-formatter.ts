@@ -5,7 +5,6 @@ import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 export class KnownErrorFormatter {
   public static format(error: BasicError): JsonApiFormattedError {
-
     // Creating the error object for initializing the JsonApiError
     const errorObj = {
       code: error.code,
