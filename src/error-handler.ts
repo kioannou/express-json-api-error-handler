@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import { AxiosErrorFormatter } from './error-formatters/axios-error-formatter';
 import { JsonApiErrorFormatter } from './error-formatters/json-api-error-formatter';
 import { KnownErrorFormatter } from './error-formatters/known-error-formatter';
+import { StackedMessageErrorFormatter } from './error-formatters/stacked-message-error-formatter';
 import { StringErrorFormatter } from './error-formatters/string-error-formatter';
 import { UnknownErrorFormatter } from './error-formatters/unknown-error-formatter';
 import { checkErrorType } from './error-type-checker/check-error-type';
@@ -10,6 +11,7 @@ import { MetaBuilder } from './meta-builder/meta-builder';
 import { AxiosError } from './models/axios/axios-error.model';
 import { ErrorHandlerOptions } from './models/error-handler-options/error-handler-options.model';
 import { FormattedError } from './models/json-api/formatted-error';
+import { StackedMessageError } from './models/stacked-message-error.model';
 import { Sender } from './sender/sender';
 
 export class ErrorHandler {
@@ -38,6 +40,10 @@ export class ErrorHandler {
       case ErrorType.AxiosError:
         const axiosError = new AxiosError(error);
         formattedError = AxiosErrorFormatter.format(axiosError);
+        break;
+      case ErrorType.StackedMessageError:
+        const stackedMessageError = new StackedMessageError(error);
+        formattedError = StackedMessageErrorFormatter.format(stackedMessageError);
         break;
       case ErrorType.JsonApiError:
         formattedError = JsonApiErrorFormatter.format(error);

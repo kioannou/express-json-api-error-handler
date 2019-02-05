@@ -1,6 +1,7 @@
 import { checkAxiosError } from './error-type-guards/axios-error.guard';
 import { checkKnownError } from './error-type-guards/check-known-error.guard';
 import { checkJsonApiError } from './error-type-guards/json-api-error.guard';
+import { checkStackedMessageError } from './error-type-guards/stacked-message-error.guard';
 import { ErrorType } from './error-type.enum';
 
 export function checkErrorType(error: any): ErrorType {
@@ -10,6 +11,8 @@ export function checkErrorType(error: any): ErrorType {
     type = ErrorType.StringError;
   } else if (checkAxiosError(error)) {
     type = ErrorType.AxiosError;
+  } else if (checkStackedMessageError(error)) {
+    type = ErrorType.StackedMessageError;
   } else if (checkKnownError(error)) {
     type = ErrorType.KnownError;
   } else if (checkJsonApiError(error)) {
