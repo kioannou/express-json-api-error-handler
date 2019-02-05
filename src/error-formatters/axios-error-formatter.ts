@@ -1,14 +1,14 @@
 import { IAxiosError } from '../models/axios/axios-error.interface';
 import { AxiosError } from '../models/axios/axios-error.model';
+import { FormattedError } from '../models/json-api/formatted-error';
 import { IJsonApiError } from '../models/json-api/json-api-error.interface';
 import { JsonApiError } from '../models/json-api/json-api-error.model';
-import { JsonApiFormattedError } from '../models/json-api/json-api-formatted-error';
 import { JsonApiErrorFormatter } from './json-api-error-formatter';
 
 type NullableJsonApiError = JsonApiError | null;
 
 export class AxiosErrorFormatter {
-  public static format(error: AxiosError): JsonApiFormattedError {
+  public static format(error: AxiosError): FormattedError {
     // When it's axios error: If there is an (JSON:API) error, usually it lies in response.data
     // If there is not handle it as an axios error
 

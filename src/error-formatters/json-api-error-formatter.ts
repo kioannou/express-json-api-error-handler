@@ -1,14 +1,14 @@
+import { FormattedError } from '../models/json-api/formatted-error';
 import { JsonApiError } from '../models/json-api/json-api-error.model';
-import { JsonApiFormattedError } from '../models/json-api/json-api-formatted-error';
 
 export class JsonApiErrorFormatter {
-  public static format(error: JsonApiError): JsonApiFormattedError {
+  public static format(error: JsonApiError): FormattedError {
     return JsonApiErrorFormatter.buildError(error);
   }
 
-  private static buildError(error: JsonApiError): JsonApiFormattedError {
+  private static buildError(error: JsonApiError): FormattedError {
     const errors: JsonApiError[] = [];
     errors.push(error);
-    return new JsonApiFormattedError(errors, { version: '1.0' });
+    return new FormattedError(errors, { version: '1.0' });
   }
 }

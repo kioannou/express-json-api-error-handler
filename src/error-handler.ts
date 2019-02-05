@@ -9,7 +9,7 @@ import { ErrorType } from './error-type-checker/error-type.enum';
 import { MetaBuilder } from './meta-builder/meta-builder';
 import { AxiosError } from './models/axios/axios-error.model';
 import { ErrorHandlerOptions } from './models/error-handler-options/error-handler-options.model';
-import { JsonApiFormattedError } from './models/json-api/json-api-formatted-error';
+import { FormattedError } from './models/json-api/formatted-error';
 import { Sender } from './sender/sender';
 
 export class ErrorHandler {
@@ -29,7 +29,7 @@ export class ErrorHandler {
   };
 
   public handle = (error: any, req: any, res: any, next: any) => {
-    let formattedError: JsonApiFormattedError;
+    let formattedError: FormattedError;
 
     // Checking for the type of the error
     const errorType: ErrorType = checkErrorType(error);
