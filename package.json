@@ -1,6 +1,6 @@
 {
   "name": "express-json-api-error-handler",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "Express middleware for JSON:API error handling",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,7 +36,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^23.3.14",
-    "jest": "^24.8.0",
+    "jest": "^25.1.0",
     "prettier": "^1.18.2",
     "ts-jest": "^23.10.5",
     "tslint": "^5.18.0",
